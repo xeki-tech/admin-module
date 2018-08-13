@@ -1,0 +1,27 @@
+{
+  "_comment": "Blog Admin comments for jus know ...",
+  "title": "Aditional Info ",
+  "base_slug": "core",
+  "_items_menu": [],
+  "items_menu": [
+    {
+      "type"  : "title",
+      "title" : "Admin Demo",
+      "class" : "space15"
+    },
+    {
+      "type": "url",
+      "icon": "fa fa-th-large",
+      "text": "Items",
+      "url": "core/list-items",
+      "background": "#2875b9"
+    },
+    {
+      "type": "url",
+      "icon": "fa fa-th-large",
+      "text": "Complex Items",
+      "url": "core/list-items2",
+      "background": "#2875b9"
+    }
+  ]
+}
