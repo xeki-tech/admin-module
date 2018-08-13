@@ -152,6 +152,7 @@ $element_table = array(
     "type" => "table",
     "text" => "Convenios",
     "class" => "col-md-12",
+    "options_list"=>
     "table" => array(
         "type" => "table",
         "background" => "#66ccff",
