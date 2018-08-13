@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <!--<link rel="icon" href="../../favicon.ico">-->
+
+    <title>Administrator {{title}}</title>
+
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="static_files/xeki_admin/core_files/vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="static_files/xeki_admin/core_files/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/fc-3.2.3/fh-3.1.3/kt-2.3.2/r-2.2.0/rg-1.0.2/rr-1.2.3/sc-1.4.3/sl-1.2.3/datatables.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="static_files/xeki_admin/core_files/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="space0"></div>
+<nav class="navbar navbar-dark navbar-fixed-top bg-inverse" style="display: none;">
+    <!-- <button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation"></button> -->
+
+    <a href="{{xeki_admin_url_base}}" class="navbar-brand margin-right-admin"><img src="static_files/backend_template/logo.png" class="img-responsive logo-nav"></a>
+
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#nav_bar_xeki_admin" aria-controls="nav_bar_xeki_admin" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse pull-right" id="nav_bar_xeki_admin">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{xeki_admin_url_base}}">Admin xeki</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{xeki_admin_url_base}}/logout">Logout</a>
+            </li>
+
+        </ul>
+    </div>
+
+</nav>
+
+<nav class="navbar navbar-expand-md fixed-top bg-inverse">
+    <a class="navbar-brand" href="{{xeki_admin_url_base}}"><img src="static_files/backend_template/logo.png" class="img-responsive logo-nav"></a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span>
+    </button>
+
+    <div class="collapse navbar-collapse " id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{xeki_admin_url_base}}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{xeki_admin_url_base}}/logout">Logout</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid main-dash">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 d-none d-sm-block sidebar +">
+            <ul class="nav nav-pills flex-column">
+                {% for item in menu_list %}
+                    {% if item.type=="url" %}
+                    <li class="nav-item">
+                        <a href="{{xeki_admin_url_base}}/{{item.url}}">
+                            <i class=" {{item.icon}}"></i>
+                            <span class="padding-left">{{item.text}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if item.type=="div" %}
+                    <div class="space40"></div>
+                        <div class="{{item.class}}"></div>
+                    {% endif %}
+
+                    {% if item.type=="title" %}
+                    <div class="space20"></div>
+                        <div class="subtitle-sidebar {{item.class}}"><b>{{item.title}}</b></div>
+                        <div class="space10"></div>
+                    {% endif %}
+
+                    {% if item.type=="group" %}
+
+
+                    <li class="has-sub" style="display: none;">
+                        <a href="#">
+                            <i class="{{item.icon}}"></i>
+                            <span>{{item.text}}</span>
+                        </a>
+                        <ul class="sub-menu">
+                            {% for sub_item in item.items%}
+                            <li><a href="{{xeki_admin_url_base}}/{{sub_item.url}}">{{sub_item.text}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                <!--<li><a href="#">Analytics</a></li>-->
+                <!--<li><a href="#">Export</a></li>-->
+            </ul>
+        </div>
+        <div class="col-sm-9 col-md-10 main mainbox">
+            {% block content %}
+
+
+            {% endblock %}
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!--<script type="application/javascript" src="https://cdnjs.com/libraries/popper.js"></script>-->
+<script type="application/javascript" src="static_files/xeki_admin/core_files/vendor/jquery/dist/jquery.js"></script>
+
+<script src="https://unpkg.com/popper.js@^1"></script>
+<script src="static_files/xeki_admin/core_files/vendor/tether/dist/js/tether.min.js"></script>
+
+<script src="static_files/xeki_admin/core_files/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/fc-3.2.3/fh-3.1.3/kt-2.3.2/r-2.2.0/rg-1.0.2/rr-1.2.3/sc-1.4.3/sl-1.2.3/datatables.min.css"/>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/fc-3.2.3/fh-3.1.3/kt-2.3.2/r-2.2.0/rg-1.0.2/rr-1.2.3/sc-1.4.3/sl-1.2.3/datatables.min.js"></script>
+<!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.0.0-beta/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/fc-3.2.3/fh-3.1.3/kt-2.3.2/r-2.2.0/rg-1.0.2/rr-1.2.3/sc-1.4.3/sl-1.2.3/datatables.min.js"></script>-->
+
+<!-- Data Tables
+================================================== -->
+<!--<link href="static_files/xeki_admin/core_files/vendor/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">-->
+<!--<link href="static_files/xeki_admin/core_files/vendor/datatables/media/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
+
+
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/media/js/jquery.dataTables.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>-->
+
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Buttons/js/buttons.bootstrap.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Buttons/js/buttons.flash.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Buttons/js/jszip.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Buttons/js/pdfmake.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Buttons/js/vfs_fonts.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Buttons/js/buttons.html5.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Buttons/js/buttons.print.min.js"></script>-->
+<!--<script src="static_files/xeki_admin/core_files/vendor/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>-->
+
+<script src="static_files/xeki_admin/core_files/vendor/tinymce/tinymce.min.js"></script>
+
+<!--<script src="static_files/xeki_admin/core_files/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>-->
+<!--<link href="static_files/xeki_admin/core_files/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet">-->
+
+<script src="static_files/xeki_admin/core_files/vendor/jquery-ui/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.js"></script>
+
+
+<link href="static_files/xeki_admin/core_files/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
+<link href="static_files/xeki_admin/core_files/vendor/jquery-ui/themes/smoothness/theme.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet">
+
+
+<script src="static_files/xeki_admin/core_files/vendor/jquery-validation/dist/jquery.validate.js"></script>
+
+
+<script>
+    window.file_manager_path="{{AG_BASE_COMPLETE}}modules/xeki_admin/core/libs/filemanager/";
+    console.log(window.file_manager_path);
+    var adjust_height_sidebar = function(){
+        $(".sidebar").addClass("active");
+        var height = $(window).height() - 68;
+        $(".sidebar").height(height);
+        $(".mainbox").height(height-40);
+    };
+    setTimeout(function () {
+        adjust_height_sidebar();
+        $( window ).resize(function() {
+            adjust_height_sidebar();
+        });
+    }, 0);
+</script>
+{% block scripts %}
+
+
+{% endblock %}
+</body>
+</html>
